@@ -1,67 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Numbers-App</title>
-</head>
-<body>
-    <h1> Arithmetic </h1>
-    <input id="fir"/>
-    <button onclick="add()">+</button>
-    <button onclick="sub()">-</button>
-    <button onclick="mult()">x</button>
-    <button onclick="div()">/</button>
-    <input id="sec"/> 
-    <label>=</label>
-    <label id = "sum"></label>
-    
+    <style>
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="column">
+        <h1>Arithmetic</h1>
+        <input id="fir" />
+        <button onclick="add()">+</button>
+        <button onclick="sub()">-</button>
+        <button onclick="mult()">x</button>
+        <button onclick="div()">/</button>
+        <input id="sec" />
+        <label>=</label>
+        <label id="sum"></label>
+      </div>
+      <div class="column">
+        <section>
+          <h2>Prime check</h2>
+          <label>Number to test:</label>
+          <input id="numberToTest" />
+          <button onclick="isPrime()">Check</button>
+          <label id="primeCheckResult"></label>
+        </section>
+      </div>
+    </div>
+
     <script>
-        async function add() {
-            let op1 = document.getElementById("fir");
-            let op2 = document.getElementById("sec");
-            let n = op1.value;
-            let m = op2.value;
-            const response = await fetch("https://arithmetic-service-r7uh.onrender.com/add/" + n + "/" + m);
+      async function add() {
+        let op1 = document.getElementById("fir");
+        let op2 = document.getElementById("sec");
+        let n = op1.value;
+        let m = op2.value;
+        const response = await fetch(
+          "https://arithmetic-service-r7uh.onrender.com/add/" + n + "/" + m
+        );
 
-            
-            const sum = await response.json();
-            document.getElementById("sum").innerText = sum;     
-        }
-        async function sub() {
-            let op1 = document.getElementById("fir");
-            let op2 = document.getElementById("sec");
-            let n = op1.value;
-            let m = op2.value;
-            const response = await fetch("https://arithmetic-service-r7uh.onrender.com/sub/" + n + "/" + m);
+        const sum = await response.json();
+        document.getElementById("sum").innerText = sum;
+      }
+      async function sub() {
+        let op1 = document.getElementById("fir");
+        let op2 = document.getElementById("sec");
+        let n = op1.value;
+        let m = op2.value;
+        const response = await fetch(
+          "https://arithmetic-service-r7uh.onrender.com/sub/" + n + "/" + m
+        );
 
-            
-            const sum = await response.json();
-            document.getElementById("sum").innerText = sum;     
-        }
-        async function mult() {
-            let op1 = document.getElementById("fir");
-            let op2 = document.getElementById("sec");
-            let n = op1.value;
-            let m = op2.value;
-            const response = await fetch("https://arithmetic-service-r7uh.onrender.com/mult/" + n + "/" + m);
+        const sum = await response.json();
+        document.getElementById("sum").innerText = sum;
+      }
+      async function mult() {
+        let op1 = document.getElementById("fir");
+        let op2 = document.getElementById("sec");
+        let n = op1.value;
+        let m = op2.value;
+        const response = await fetch(
+          "https://arithmetic-service-r7uh.onrender.com/mult/" + n + "/" + m
+        );
 
-            
-            const sum = await response.json();
-            document.getElementById("sum").innerText = sum;     
-        }
-        async function div() {
-            let op1 = document.getElementById("fir");
-            let op2 = document.getElementById("sec");
-            let n = op1.value;
-            let m = op2.value;
-            const response = await fetch("https://arithmetic-service-r7uh.onrender.com/div/" + n + "/" + m);
+        const sum = await response.json();
+        document.getElementById("sum").innerText = sum;
+      }
+      async function div() {
+        let op1 = document.getElementById("fir");
+        let op2 = document.getElementById("sec");
+        let n = op1.value;
+        let m = op2.value;
+        const response = await fetch(
+          "https://arithmetic-service-r7uh.onrender.com/div/" + n + "/" + m
+        );
 
-            
-            const sum = await response.json();
-            document.getElementById("sum").innerText = sum;     
-        }
+        const sum = await response.json();
+        document.getElementById("sum").innerText = sum;
+      }
+
+      async function isPrime() {
+        const numberToTest = document.getElementById("numberToTest");
+        let n = numberToTest.value;
+        const response = await fetch("https://primes-service-latest-qd93.onrender.com/" + n);
+        const result = await response.json();
+        document.getElementById("primeCheckResult").innerText = result;
+      }
     </script>
-</body>
-
+  </body>
 </html>
