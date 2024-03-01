@@ -114,7 +114,7 @@
       async function cipher() {
         const numberToTest = document.getElementById("textToCipher");
         let plainText = numberToTest.value;
-        const response = await fetch("https://ciphers-service-chanothy.onrender.com" + plaintText);
+        const response = await fetch("https://ciphers-service-chanothy.onrender.com/" + plaintText);
         const result = await response.json();
         document.getElementById("cipher").innerText = result;
       }
