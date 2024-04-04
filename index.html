@@ -19,6 +19,7 @@
     </style>
   </head>
   <body>
+    <div class="row" id="login"></div>
     <div class="row">
       <div class="column">
         <h1>Arithmetic</h1>
@@ -51,7 +52,11 @@
       </div>
     </div>
 
+    <script src="configuration.js"></script>
     <script>
+      let hosts = configuration.hosts;
+      displayLogin();
+
       async function add() {
         let op1 = document.getElementById("fir");
         let op2 = document.getElementById("sec");
@@ -104,9 +109,10 @@
       async function isPrime() {
         const numberToTest = document.getElementById("numberToTest");
         let n = numberToTest.value;
-        const response = await fetch(
-          "https://primes-service-latest-qd93.onrender.com/primes/" + n
-        );
+        const headers = { Authorization: `Bearer ${configuration.token}` };
+        const response = await fetch(`${hosts.primes_service}/primes/${n}`, {
+          headers,
+        });
         const result = await response.json();
         document.getElementById("primeCheckResult").innerText = result;
       }
@@ -114,7 +120,11 @@
       async function cipher() {
         const numberToTest = document.getElementById("textToCipher");
         let plainText = numberToTest.value;
-        const response = await fetch("https://ciphers-service-chanothy.onrender.com/ciphers/caesar/" + plainText + "/3");
+        const response = await fetch(
+          "https://ciphers-service-chanothy.onrender.com/ciphers/caesar/" +
+            plainText +
+            "/3"
+        );
         const result = await response.json();
         document.getElementById("cipher").innerText = result.cipher;
       }
